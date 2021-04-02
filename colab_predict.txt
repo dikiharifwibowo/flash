@@ -1,0 +1,47 @@
+=======================================
+
+from pydantic import BaseModel
+
+class Catat(BaseModel):
+    catatan: str 
+    class Config:
+        schema_extra = {
+            "example": {
+                "catatan": "Consult for laparoscopic gastric", 
+            }
+        }
+
+
+========================================
+
+from fastapi import FastAPI
+import pickle
+
+app = FastAPI()
+
+@app.on_event("startup")
+def load_model():
+    global model
+
+@app.get('/')
+def index():
+    return {'message': 'This is the homepage of the API '}
+
+
+@app.post('/keyword')
+def get_keyword(data: Catat):
+    received = data.dict()
+    catatans = received['catatan']
+    pred_keyword = tag_keywords(catatans)
+    return {'keywords': pred_keyword}
+
+=======================================
+
+from colabcode import ColabCode
+server = ColabCode(port=8000, code=False)
+
+======================================
+
+server.run_app(app=app)
+
+====================================

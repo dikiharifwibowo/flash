@@ -1,0 +1,88 @@
+<html>
+<head>
+    <title>Form Medis</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="konten">
+    <div class="kepala">
+        <div class="lock"></div>
+        <h2 class="judul">Preview Keyword</h2>
+    </div>
+    <div class="artikel">
+        <fieldset>
+            <legend><h3>Catatan Medis</h3></legend>
+            <div class="grup">
+                <input type="textarea" name="catatan" rows="10" cols="50" placeholder="">
+            </div>
+        </fieldset>
+        <div class="grup-offset">
+            <button type="submit" value="keyword" onclick="showData()">Keyword</button>
+        </div>
+        <br/>
+
+        <fieldset>
+            <legend><h3>Data Keyword</h3></legend>
+            <div class="grup-offset" style="display: none;">
+                <input type="checkbox" name="Allergies" value="Allergies">Allergies
+                <input type="checkbox" name="Asthma" value="Asthma">Asthma
+                <input type="checkbox" name="NasalSparys" value="NasalSparys">Nasal Sparys
+                <input type="checkbox" name="Rhinitis" value="Rhinitis" required>Rhinitis
+            </div>
+        </fieldset>
+        <legend><h3>Pilih / centang keyword yang sesuai dan klik Save as CSV</h3></legend>
+        <div class="grup-offset">
+            <button value="save" onclick="download()">Save as CSV</button>
+        </div>
+        <br/>
+
+        <div class="footer">
+            <center><h2>@2021 Tugas Kelompok Data Science</h2></center>
+        </div>
+    </div>
+</div>
+<table id="tab" class="table table-bordered table-striped" style="opacity: 0.1;">
+    <tr>
+        <th>No</th>
+        <th>Keyword</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Allergies</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Asthana</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Nasal Sparys</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Rhinitis</td>
+    </tr>
+</table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="table2csv.min.js"></script>
+<script>
+
+    function showData() {
+        $.ajax({
+            url:'http://6bdc8d15d13d.ngrok.io/docs',
+            type:'post',
+            data:{
+                "catatan": "Consult for laparoscopic gastric"
+            },
+            success: function(data) {
+                alert(data);
+            }
+        })
+    }
+    function download() {
+        $("#tab").table2csv({ filename:'dataset.csv'
+        });
+    }
+</script>
+</body>
+</html>
