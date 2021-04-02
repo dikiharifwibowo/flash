@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2f9020d7-9024-4bfc-b237-7137d42264e2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/dua.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FE.html" beforeDir="false" afterPath="$PROJECT_DIR$/FE.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dua.html" beforeDir="false" afterPath="$PROJECT_DIR$/dua.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +46,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617368974221</updated>
-      <workItem from="1617368975569" duration="2924000" />
+      <workItem from="1617368975569" duration="3363000" />
     </task>
     <servers />
   </component>

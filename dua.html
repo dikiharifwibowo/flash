@@ -70,6 +70,7 @@
     function showData() {
         $.ajax({
             url:'http://6bdc8d15d13d.ngrok.io/docs',
+            headers: {  'Access-Control-Allow-Origin': 'http://6bdc8d15d13d.ngrok.io/docs' },
             type:'post',
             data:{
                 "catatan": "Consult for laparoscopic gastric"
