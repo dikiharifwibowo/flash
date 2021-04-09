@@ -7,6 +7,11 @@
     <title> Dikih Arif Wibowo | Link Aja</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+
+    <!-- Load d3-cloud -->
+    <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
 </head>
 <body class="bg-gradient-to-r from-purple-50 to-purple-100">
 
@@ -110,6 +115,16 @@
     </div>
     <div class="mx-auto text-base sm:max-w-md lg:text-xl md:max-w-3xl mb-16">
         <label for="in_race" class="font-bold w-2/5">
+            Base URL
+        </label>
+        <input type="text" v-model="baseurl" class="w-60 w-full sm:w-3/4 py-3 text-center sm:text-left sm:pl-5 bg-white
+        border border-solid border-black-20% box-border rounded-md font-nunito font-semibold text-career-dropdown text-black-50%"
+        >
+        <div class="mb-8">
+            your base url : {{ baseurl }}
+        </div>
+
+        <label for="in_race" class="font-bold w-2/5">
             Medical records
         </label>
         <textarea v-model="message" id="in_race" name="race" rows="10" class="w-full mt-4 px-2 py-1 mb-4 sm:text-sm border border-solid
@@ -117,6 +132,7 @@
         <button @click="showKeyword" class="px-6 py-3 mb-3 text-lg text-grey font-semibold bg-yellow-300 rounded-md sm:mb-0 sm:w-auto">
             Cek
         </button>
+        <div id="my_dataviz"></div>
     </div>
 
     <div class="mx-auto text-base sm:max-w-md lg:text-xl md:max-w-3xl mb-16">
@@ -192,6 +208,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+
+
 <script src="table2csv.min.js"></script>
 <script>
 
@@ -206,17 +224,67 @@
     var app = new Vue({
         el: '#app',
         data: {
+            baseurl: null,
             message: null,
             listKeyword: [],
             listToCsv:[],
+            myWords: []
         },
         methods: {
             async showKeyword() {
                 console.log('init')
-                const response = await axios.post('http://43cc3df69a17.ngrok.io/keyword', json={'catatan': this.message})
+                const response = await axios.post(this.baseurl, json={'catatan': this.message})
                 console.log(response.data.keywords)
                 this.listKeyword = response.data.keywords
+                var words = []
+                this.listKeyword.forEach(function(row) {
+                    console.log(row)
+                    var obj = {};
+                    obj["word"] = row;
+                    obj["size"] = Math.floor(Math.random() * 100);
+                    words.push(obj)
+                });
+                this.myWords = words;
+                var margin = {top: 10, right: 10, bottom: 10, left: 10},
+                    width = 450 - margin.left - margin.right,
+                    height = 450 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+                var svg = d3.select("#my_dataviz").append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform",
+                        "translate(" + margin.left + "," + margin.top + ")");
+
+// Constructs a new cloud layout instance. It run an algorithm to find the position of words that suits your requirements
+// Wordcloud features that are different from one word to the other must be here
+                var layout = d3.layout.cloud()
+                    .size([width, height])
+                    .words(this.myWords.map(function(d) { return {text: d.word, size:d.size}; }))
+                    .padding(5)        //space between words
+                    .rotate(function() { return ~~(Math.random() * 2) * 90; })
+                    .fontSize(function(d) { return d.size; })      // font size of words
+                    .on("end", draw);
+                layout.start();
+                function draw(words) {
+                    svg
+                        .append("g")
+                        .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+                        .selectAll("text")
+                        .data(words)
+                        .enter().append("text")
+                        .style("font-size", function(d) { return d.size; })
+                        .style("fill", "#69b3a2")
+                        .attr("text-anchor", "middle")
+                        .style("font-family", "Impact")
+                        .attr("transform", function(d) {
+                            return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                        })
+                        .text(function(d) { return d.text; });
+                }
             },
+
             saveList(label) {
                 console.log(label)
                 this.listToCsv.push(label)
