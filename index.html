@@ -117,22 +117,17 @@
         <button @click="showKeyword" class="px-6 py-3 mb-3 text-lg text-grey font-semibold bg-yellow-300 rounded-md sm:mb-0 sm:w-auto">
             Cek
         </button>
-        {{ message }}
     </div>
 
     <div class="mx-auto text-base sm:max-w-md lg:text-xl md:max-w-3xl mb-16">
         <label for="in_race" class="font-bold w-2/5">
             List Keyword
         </label>
-        <div class="bg-gray-200 rounded-xl mb-8">
+        <div class="bg-gray-200 rounded-xl mb-8" style="max-height: 300px; overflow-x: scroll;">
             <div class="p-4">
                 <div class="flex flex-col">
-                    <label class="inline-flex items-center mt-3">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" checked><span class="ml-2 text-gray-700">label</span>
-                    </label>
-
-                    <label class="inline-flex items-center mt-3">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600" checked><span class="ml-2 text-gray-700">label</span>
+                    <label class="inline-flex items-center mt-3" v-for="row in listKeyword">
+                        <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" @click="saveList(row)"><span class="ml-2 text-gray-700">{{ row }}</span>
                     </label>
                 </div>
             </div>
@@ -212,25 +207,20 @@
         el: '#app',
         data: {
             message: null,
-            keyword: null,
+            listKeyword: [],
+            listToCsv:[],
         },
         methods: {
             async showKeyword() {
                 console.log('init')
-                dataBody = {
-                   message: this.message
-                }
-                //req = requests.post('http://0.0.0.0:5000/set/',json={'num':'1'}).json()
-
-                axios.post('http://eee134a3639f.ngrok.io/keyword', json={'keyword':'1'})
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-
+                const response = await axios.post('http://eee134a3639f.ngrok.io/keyword', json={'catatan': this.message})
+                console.log(response.data.keywords)
+                this.listKeyword = response.data.keywords
             },
+            saveList(label) {
+                console.log(label)
+                this.listToCsv.push(label)
+            }
         }
     })
 </script>
