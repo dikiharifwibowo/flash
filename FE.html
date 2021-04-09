@@ -1,219 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title> Dikih Arif Wibowo | Link Aja</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <title>Form Medis</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body class="bg-gradient-to-r from-purple-50 to-purple-100">
+<body>
+<div class="konten">
+    <div class="kepala">
+        <div class="lock"></div>
+        <h2 class="judul">Preview Keyword</h2>
+    </div>
+    <div class="artikel">
+            <fieldset>
+                <legend><h3>Catatan Medis</h3></legend>
+                <div class="grup">
+                    <textarea name=""  id="" cols="30" rows="10" style="width: 100%;"></textarea>
+                </div>
+            </fieldset>
+            <div class="grup-offset">
+                <button type="submit" value="keyword" onclick="showData()">Keyword</button>
+            </div>
+            <br/>
 
-<!-- Mobile -->
-<div class="px-8 py-5 w-full z-10 bg-gradient-to-r from-green-500 to-green-600 leading-10">
-    <nav class="md:hidden lg:hidden">
-        <div class="flex">
-            <a href="/" class="w-1/2">
-                <h1 class="text-xl text-white">HealthyCek</h1>
-            </a>
-            <div class="w-1/2 text-right">
-                <button id="humberger"
-                        class="cursor-pointer text-white inline focus:shadow-none focus:outline-none md:hidden opened"
-                        aria-label="Main Menu" aria-expanded="true">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
+            <fieldset>
+                <legend><h3>Data Keyword</h3></legend>
+                <div class="grup-offset" style="display: none;">
+                    <input type="checkbox" name="Allergies" value="Allergies">Allergies
+                    <input type="checkbox" name="Asthma" value="Asthma">Asthma
+                    <input type="checkbox" name="NasalSparys" value="NasalSparys">Nasal Sparys
+                    <input type="checkbox" name="Rhinitis" value="Rhinitis" required>Rhinitis
+                </div>
+            </fieldset>
+            <legend><h3>Pilih / centang keyword yang sesuai dan klik Save as CSV</h3></legend>
+            <div class="grup-offset">
+                <button value="save" onclick="download()">Save as CSV</button>
             </div>
-        </div>
-        <div class="grid hidden" id="mobile">
-            <a class="w-full px-4 py-2 mt-2 text-sm font-semibold text-gray font-nunito bg-yellow-300
-            rounded-lg"
-               href="/">Home</a>
-            <div class="w-full px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg hover:text-gray-900 focus:text-gray-900 focus:outline-none focus:shadow-outline dropdown inline-block relative">
-                <button>
-                    <span class="font-nunito font-semibold text-white">Product
-                    </span>
-                </button>
-                <ul class="dropdown-menu hidden font-nunito font-semibold text-blue-500 pt-1">
-                    <li class="">
-                        <a class="rounded-t bg-white hover:bg-gray-100 py-4 px-4 block whitespace-no-wrap"
-                           href="#">Product 1</a>
-                    </li>
-                    <li class="">
-                        <a class="rounded-t bg-white hover:bg-gray-100 py-4 px-4 block whitespace-no-wrap"
-                           href="#">Product 2</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+            <br/>
 
-    <!-- Dekstop -->
-    <div class="container mx-auto">
-        <div class="flex">
-            <div class="w-1/4">
-                <h1 class="text-2xl text-white font-bold font-nunito">HealthyCek</h1>
+            <div class="footer">
+                <center><h2>@2021 Tugas Kelompok Data Science</h2></center>
             </div>
-            <div class="w-3/4 flex justify-end">
-                <ul class="flex flex-row flex-wrap hidden md:flex md:flex-row" id="mobileMenu">
-                    <!-- Home -->
-                    <li class="pr-5">
-                        <a href="/"
-                           class="text-base text-gray font-semibold bg-yellow-300 rounded rounded-lg px-4 py-2">Home</a>
-                    </li>
-                    <li class="pr-8">
-                        <a href="/contact" class="text-base text-white">Contact Us</a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
     </div>
 </div>
-<section class="px-2 py-16 bg-gradient-to-r from-green-500 to-green-600  md:px-0">
-    <div class=" items-center max-w-6xl px-8 mx-auto xl:px-5">
-        <div class="flex flex-wrap items-center sm:-mx-3">
-            <div class="w-full md:w-1/2 md:px-3" data-aos="fade-right" data-aos-duration="1500">
-                <div class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
-                    <div class="text-4xl font-extrabold tracking-tight text-white sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl">
-                        <span class="block xl:inline">Mengapa HealthyCek?</span>
-                    </div>
-                    <p class="mx-auto text-base text-white sm:max-w-md lg:text-xl md:max-w-3xl">Lorem ipsum dolor sit
-                        amet, consectetur adipisicing elit. Adipisci amet corporis deleniti dolore doloremque esse ex
-                        fugiat iure, laborum libero maiores neque non praesentium quas ratione sapiente sed ullam,
-                        vitae!</p>
-                    <div class="relative flex flex-col sm:flex-row sm:space-x-4">
-                        <a href="#" class="greeting flex items-center w-full px-6 py-3 mb-3 text-lg text-grey font-semibold bg-yellow-300 rounded-md sm:mb-0
-                               sm:w-auto">
-                            Contact Us
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="w-full md:w-1/2" data-aos="fade-left" data-aos-duration="1500">
-                <div class="w-full h-auto overflow-hidden sm:rounded-xl">
-                    <img src="https://assets.website-files.com/5d8a2887296e9177accb65bc/5f76d52e2bce7d4817a291b7_our-team-hero-v5.png"
-                         alt="Javan Cipta Solusi">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="mx-auto container" data-aos-duration="1000" data-aos="fade-up">
-    <div class="text-3xl font-nunito font-extrabold text-center text-gray-900 mb-7 mt-16">
-        <span class="block xl:inline">Kuy Cek</span>
-    </div>
-    <div class="mx-auto text-base sm:max-w-md lg:text-xl md:max-w-3xl mb-16">
-        <label for="in_race" class="font-bold w-2/5">
-            Medical records
-        </label>
-        <textarea id="in_race" name="race" rows="10" class="w-full mt-4 px-2 py-1 mb-4 sm:text-sm border border-solid
-        border-black-20% rounded-md" placeholder="type description" required="" spellcheck="false"></textarea>
-        <a href="#" class="px-6 py-3 mb-3 text-lg text-grey font-semibold bg-yellow-300 rounded-md sm:mb-0 sm:w-auto">
-            Cek
-        </a>
-    </div>
-
-    <div class="mx-auto text-base sm:max-w-md lg:text-xl md:max-w-3xl mb-16">
-        <label for="in_race" class="font-bold w-2/5">
-            List Keyword
-        </label>
-        <div class="bg-gray-200 rounded-xl mb-8">
-            <div class="p-4">
-                <div class="flex flex-col">
-                    <label class="inline-flex items-center mt-3">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" checked><span class="ml-2 text-gray-700">label</span>
-                    </label>
-
-                    <label class="inline-flex items-center mt-3">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-red-600" checked><span class="ml-2 text-gray-700">label</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <a href="#" class="px-6 py-3 w-2/5 text-lg text-grey font-semibold bg-yellow-300 rounded-md sm:mb-0 sm:w-auto">
-            Save to CSV
-        </a>
-    </div>
-</div>
-
-<!-- Footer (resources/views/components/footer.blade.php) -->
-<footer class="footer relative pt-1 border-b-2 border-gray-900 p-4 mt-8 w-full bg-cover bg-no-repeat"
-        style="background-image: linear-gradient(
-200deg
-,#05afaa,#0c9193); ">
-    <div class="container mx-auto">
-        <div class="sm:flex sm:mt-8" data-aos="zoom-in" data-aos-duration="1000">
-            <div class="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-between">
-                <div class="flex flex-col pr-20 w-5/12">
-                    <div class="">
-                        <h1 class=" my-auto text-2xl font-bold text-white">HealthyCek</h1>
-                    </div>
-                    <p class="text-sm text-white pt-4 sm:max-w-md lg:text-l md:max-w-3xl">Partner Sehat kamu!</p>
-                    <div class="flex flex-wrap -ml-2 mt-2">
-                        <div class="rounded-full w-auto flex-1 text-gray-700 hover:bg-blue-200 m-2">
-                            <a href="#">
-                                <img src="https://assets.website-files.com/5d8a2887296e9177accb65bc/5f1901cfe32bb03fcbf4df90_instagram.png"
-                                     alt="youtube">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-col sm:mx-10 pb-2 w-4/12">
-                    <h1 class="text-xl font-bold text-white inline pt-4 lg:pt-0">Our History</h1>
-                    <p class="text-sm text-white pt-4 pb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Accusantium aliquam ducimus in, itaque iusto quam voluptates. Ad, aliquid, voluptate! Autem ex
-                        impedit labore omnis veritatis. Eos est fugiat fugit repellendus.</p>
-                </div>
-                <div class="flex flex-col">
-                    <h1 class="text-xl font-bold text-white inline pt-4 lg:pt-0">Sydney</h1>
-                    <p class="text-sm text-white pt-4 sm:max-w-md lg:text-l md:max-w-3xl">Level 28, 161 Castlereagh
-                        St, Sydney 2000</p>
-                    <p class="text-sm text-white sm:max-w-md lg:text-l md:max-w-3xl">+61 2 8123 0997</p>
-
-                    <h1 class="text-xl font-bold text-white inline pt-4">Yogyakarta</h1>
-                    <p class="text-sm text-white pt-4 sm:max-w-md lg:text-l md:max-w-3xl">Jl Magelang No 65,
-                        Tegalrejo, Yogyakarta, Indonesia 55242</p>
-                    <p class="text-sm text-white sm:max-w-md lg:text-l md:max-w-3xl">+62 882 1673 4392</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
+<table id="tab" class="table table-bordered table-striped" style="opacity: 0.1;">
+    <tr>
+        <th>No</th>
+        <th>Keyword</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Allergies</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Asthana</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Nasal Sparys</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Rhinitis</td>
+    </tr>
+</table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="table2csv.min.js"></script>
 <script>
-    AOS.init();
-    var app = new Vue({
-        el: '#app',
-        data: {
 
-            base_url: "https://image.tmdb.org/t/p/w500",
-            details_url: "details.html?movie_id=",
-            list_movie: [],
-            years: [
-                {name: '2020'},
-                {name: '2019'},
-                {name: '2018'},
-                {name: '2017'},
-                {name: '2016'},
-            ]
-        },
-        mounted() {
-            axios
-                .get('https://api.themoviedb.org/3/movie/top_rated?api_key=d212dc1bfc2d8009f736f68f2e71938f')
-                .then(response => (this.list_movie = response))
-        }
-    })
+ function showData() {
+  $('.grup-offset').show();
+ }
+ function download() {
+     $("#tab").table2csv({ filename:'dataset.csv'
+     });
+ }
 </script>
 </body>
 </html>

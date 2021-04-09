@@ -104,7 +104,7 @@
     </div>
 </section>
 
-<div class="mx-auto container" data-aos-duration="1000" data-aos="fade-up">
+<div class="mx-auto container" data-aos-duration="1000" data-aos="fade-up" id="app">
     <div class="text-3xl font-nunito font-extrabold text-center text-gray-900 mb-7 mt-16">
         <span class="block xl:inline">Kuy Cek</span>
     </div>
@@ -112,11 +112,12 @@
         <label for="in_race" class="font-bold w-2/5">
             Medical records
         </label>
-        <textarea id="in_race" name="race" rows="10" class="w-full mt-4 px-2 py-1 mb-4 sm:text-sm border border-solid
+        <textarea v-model="message" id="in_race" name="race" rows="10" class="w-full mt-4 px-2 py-1 mb-4 sm:text-sm border border-solid
         border-black-20% rounded-md" placeholder="type description" required="" spellcheck="false"></textarea>
-        <a href="#" class="px-6 py-3 mb-3 text-lg text-grey font-semibold bg-yellow-300 rounded-md sm:mb-0 sm:w-auto">
+        <button @click="showKeyword" class="px-6 py-3 mb-3 text-lg text-grey font-semibold bg-yellow-300 rounded-md sm:mb-0 sm:w-auto">
             Cek
-        </a>
+        </button>
+        {{ message }}
     </div>
 
     <div class="mx-auto text-base sm:max-w-md lg:text-xl md:max-w-3xl mb-16">
@@ -190,6 +191,48 @@
 
 <script>
     AOS.init();
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="table2csv.min.js"></script>
+<script>
+
+    function download() {
+        $("#tab").table2csv({
+            filename: 'dataset.csv'
+        });
+    }
+</script>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: null,
+            keyword: null,
+        },
+        methods: {
+            async showKeyword() {
+                console.log('init')
+                dataBody = {
+                   message: this.message
+                }
+                //req = requests.post('http://0.0.0.0:5000/set/',json={'num':'1'}).json()
+
+                axios.post('http://eee134a3639f.ngrok.io/keyword', json={'keyword':'1'})
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            },
+        }
+    })
 </script>
 </body>
 </html>
