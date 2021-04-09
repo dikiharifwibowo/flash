@@ -208,16 +208,12 @@
         data: {
             message: null,
             listKeyword: [],
-            listToCsv:[
-                ['label 1'],
-                ['label 2'],
-                ['label 3']
-            ],
+            listToCsv:[],
         },
         methods: {
             async showKeyword() {
                 console.log('init')
-                const response = await axios.post('http://eee134a3639f.ngrok.io/keyword', json={'catatan': this.message})
+                const response = await axios.post('http://43cc3df69a17.ngrok.io/keyword', json={'catatan': this.message})
                 console.log(response.data.keywords)
                 this.listKeyword = response.data.keywords
             },
@@ -226,11 +222,13 @@
                 this.listToCsv.push(label)
             },
             async saveCsv() {
-                var csv = 'Keyword\n';
+                var csv = 'No, Keyword\n';
+                var no = 0;
 
                 //merge the data with CSV
                 this.listToCsv.forEach(function(row) {
-                    csv += row;
+                    no++
+                    csv += no+','+row;
                     csv += "\n";
                 });
 
