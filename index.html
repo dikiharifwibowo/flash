@@ -233,7 +233,7 @@
         methods: {
             async showKeyword() {
                 console.log('init')
-                const response = await axios.post(this.baseurl, json={'catatan': this.message})
+                const response = await axios.post(this.baseurl+'keyword', json={'catatan': this.message})
                 console.log(response.data.keywords)
                 this.listKeyword = response.data.keywords
                 var words = []
